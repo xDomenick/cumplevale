@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cumpleaños #3 de Valentino</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Comic Sans MS', cursive;
+            text-align: center;
+            background: radial-gradient(circle at top, #3d0a6b, #007f73);
+            overflow-x: hidden;
+        }
+
+        /* BUZZ COMO MARCA DE AGUA */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 80vw;
+            height: 80vw;
+            background: url("buzz_fondo.png") no-repeat center;
+            background-size: contain;
+            opacity: 0.10;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+        }
+
+        .contenedor {
+            position: relative;
+            z-index: 1;
+            padding: 15px;
+        }
+
+        h1, h2, h3, p {
+            color: white;
+            animation: flotar 4s ease-in-out infinite;
+        }
+
+        h3 {
+            font-size: 1.2em;
+            letter-spacing: 2px;
+            opacity: 0.9;
+        }
+
+        h2 {
+            color: #ffe600;
+        }
+
+        /* FOTO VALENTINO */
+        .foto-valentino img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 6px solid #ffeb3b;
+            object-fit: cover;
+            animation: pulso 3s infinite;
+            cursor: pointer;
+            transition: transform 0.4s;
+        }
+
+        .foto-valentino img:active {
+            transform: scale(0.95);
+        }
+
+        .foto-valentino p {
+            font-size: 1.3em;
+        }
+
+        /* TEXTO GENERAL */
+        .texto-general {
+            margin: 25px 0 15px;
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        /* FILAS */
+        .fila {
+            margin: 18px 0;
+        }
+
+        .fila-contenido {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            width: 230px;
+            padding: 16px;
+            font-size: 1.2em;
+            border-radius: 30px;
+            border: none;
+            background: linear-gradient(45deg, #ffeb3b, #00ffcc);
+            box-shadow: 0 8px 0 #c9b800;
+            cursor: pointer;
+        }
+
+        button:active {
+            transform: scale(0.95);
+            box-shadow: 0 4px 0 #c9b800;
+        }
+
+        .dato {
+            font-size: 1.5em;
+            color: white;
+            min-width: 160px;
+            animation: aparecer 0.4s ease-in;
+        }
+
+        .final {
+            margin-top: 35px;
+            font-size: 1.4em;
+            color: #ffeb3b;
+            animation: flotar 3s infinite;
+        }
+
+        @keyframes flotar {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        @keyframes pulso {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes aparecer {
+            from { opacity: 0; transform: translateX(-10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="contenedor">
+
+    <!-- TEXTO SUPERIOR -->
+    <h3>ESTÁS INVITADO A:</h3>
+
+    <h1>🚀 Cumpleaños #3 de Valentino 🚀</h1>
+    <h2>¡Al infinito y más allá!</h2>
+
+    <!-- FOTO INTERACTIVA -->
+    <div class="foto-valentino">
+        <img src="Valentino1.png" id="fotoValentino" onclick="cambiarFoto()">
+        <p>👆 Toca la foto de Valentino 👆</p>
+    </div>
+
+    <!-- TEXTO GENERAL -->
+    <p class="texto-general">
+        Click a estos botones para descubrir la fecha, hora y lugar del cumpleaños
+    </p>
+
+    <!-- FECHA -->
+    <div class="fila">
+        <div class="fila-contenido">
+            <button onclick="mostrarFecha()">📅 Fecha</button>
+            <div id="fecha" class="dato"></div>
+        </div>
+    </div>
+
+    <!-- HORA -->
+    <div class="fila">
+        <div class="fila-contenido">
+            <button onclick="mostrarHora()">⏰ Hora</button>
+            <div id="hora" class="dato"></div>
+        </div>
+    </div>
+
+    <!-- LUGAR -->
+    <div class="fila">
+        <div class="fila-contenido">
+            <button onclick="mostrarLugar()">📍 Lugar</button>
+            <div id="lugar" class="dato"></div>
+        </div>
+    </div>
+
+    <!-- TEXTO FINAL -->
+    <div class="final">
+        🎉 te esperamooos 🎉
+    </div>
+
+</div>
+
+<script>
+    function vibrar() {
+        if (navigator.vibrate) navigator.vibrate(50);
+    }
+
+    function mostrarFecha() {
+        vibrar();
+        document.getElementById("fecha").innerHTML = "6 de enero";
+    }
+
+    function mostrarHora() {
+        vibrar();
+        document.getElementById("hora").innerHTML = "5 de la tarde";
+    }
+
+    function mostrarLugar() {
+        vibrar();
+        document.getElementById("lugar").innerHTML = "La Yara";
+    }
+
+    const fotos = ["Valentino1.png", "Valentino2.png", "Valentino3.png"];
+    let indice = 0;
+
+    function cambiarFoto() {
+        vibrar();
+        indice = (indice + 1) % fotos.length;
+        document.getElementById("fotoValentino").src = fotos[indice];
+    }
+</script>
+
+</body>
+</html>
